@@ -1,74 +1,127 @@
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class JUnitExampleTest {
 
-    private JUnitExample jUnitExample;
+    private JUnitTestable jUnitExample;
     private static final Logger LOGGER = Logger.getLogger(JUnitExampleTest.class.getName());
 
     @BeforeEach
     void setUp() {
         jUnitExample = new JUnitExample();
-        LOGGER.info("Inside @BeforeEach");
+        LOGGER.info("We are in setUP @Before each");
+
+
     }
 
     @Test
-    @DisplayName("Should Divide Two Numbers")
+    @DisplayName(" Should Divide TwoNumbers")
+    @Order(1)
     void shouldDivideTwoNumbers() {
-
-        LOGGER.info("Inside ShouldDivideTwoNumbers");
+        LOGGER.info("We are in divideTwoNumbers");
 
         //Given
-        //what are the inputs we need for this method
-        final int num1 = 12;
-        final int num2 = 4;
+        final int num1 = 8;
+        final int num2 = 2;
 
-        //what is the  expected result
-        int expectedResult = num1 / num2;
+
+        final int expectedResult = num1/num2;
+
+        //when
+        int actualResult = jUnitExample.divideTwoNumbers(num1, num2);
+
+       //then
+//        assertEquals(expectedResult, actualResult);
+
+        assertEquals(4, jUnitExample.divideTwoNumbers(num1,num2));
+
+
+    }
+
+    @Order(2)
+    @Test
+    void shouldThrowIllegalStateException(){
+
+//        Runnable runnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                jUnitExample.divideTwoNumbers(4,0);
+//
+//            }
+//        };
+
+        assertThrows(IllegalArgumentException.class,
+                ()->{
+                    jUnitExample.divideTwoNumbers(4,0);
+
+                });
+
+    }
+
+    @Test
+    void convertAStringToUpperCase() {
+        //Given
+        final String input = "paul";
+
+        final String expectedResult = input.toUpperCase();
 
         //when
 
-        int actualResult = jUnitExample.divideTwoNumbers(num1, num2);
+        String actualResult = jUnitExample.convertAStringToUpperCase(input);
 
-        //Then
+        //then
 
-//        assertEquals(expectedResult, actualResult);
+        assertEquals(expectedResult, actualResult);
 
-        assertEquals(3,jUnitExample.divideTwoNumbers(num1,num2) );
+    }
+    @Test
+    void shouldThrowIllegalStateException1(){
 
+//
 
+        assertThrows(IllegalArgumentException.class,
+                ()->{
+                    jUnitExample.convertAStringToUpperCase(null);
+                    jUnitExample.convertAStringToUpperCase("");
+
+                });
 
     }
 
     @Test
-    void shouldThrowAnIllegalArgumentException(){
+
+    void addNamesToACollection() {
+
+        //Given
+        final String input = "Timothy";
+
+        //when
+        jUnitExample.addNamesToACollection(input);
+
+        //then
+
+        assertEquals(1 , jUnitExample.getNames().size());
+
+        assertTrue(jUnitExample.getNames().contains(input));
+
+
+
+
+
+
+
+
 
 
 
     }
-
-
 
     @Test
     @Disabled
-
-    void convertAStringToUpperCase() {
-    }
-
-    @Test
-    @Disabled
-
     void findANameInACollection() {
-    }
-
-    @Test
-    @Disabled
-    void printNames() {
     }
 }

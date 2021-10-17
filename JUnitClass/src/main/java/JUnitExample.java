@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class JUnitExample {
+public class JUnitExample implements JUnitTestable {
 
     private List<String> names ;
 
@@ -29,7 +29,7 @@ public class JUnitExample {
     }
 
 
-    private void addNamesToACollection(final String name){
+    public void addNamesToACollection(final String name){
         names.add(name);
     }
 
@@ -54,6 +54,10 @@ public class JUnitExample {
     public void printNames(){
         if(names == null) throw new NullPointerException("List is Empty");
         names.forEach(System.out::println);
+    }
+
+    public List<String> getNames(){
+        return this.names;
     }
 
 
