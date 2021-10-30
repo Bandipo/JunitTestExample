@@ -22,13 +22,13 @@ public class App {
         registrationService.registerForCard(elder);
         registrationService.registerForCard(pregnantWoman);
 
-
+         // using queue without priority
 //        registrationService.registerPerson();
 //        registrationService.registerPerson();
 //        registrationService.registerPerson();
 //        registrationService.registerPerson();
 
-
+         // using priority queue
         registrationService.registerPerson1();
         registrationService.registerPerson1();
         registrationService.registerPerson1();
@@ -38,8 +38,18 @@ public class App {
 //        registrationService.printRegisteredPersons();
 
 
+        //using optional if the person is found
 
+        final Person kabir = registrationService.getPersonByName("Kabir");
 
+        System.out.println(kabir);
+
+        // this throws an exception if the person is not found
+        // uncomment to see it work
+
+//        final Person unRegisteredName = registrationService.getPersonByName("throw exception");
+//
+//        System.out.println(unRegisteredName);
 
 
     }

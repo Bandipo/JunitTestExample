@@ -11,7 +11,7 @@ public interface VotersRegistrationService {
    void registerPerson1();
    void printRegisteredPersons();
 
-//   Person  getPersonByName(final String name);
+   Person  getPersonByName(final String name);
 
    Set<Person> getRegisteredPersons();
 }

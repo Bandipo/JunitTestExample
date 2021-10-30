@@ -1,5 +1,6 @@
 package service;
 
+import exception.PersonNotFoundException;
 import model.Person;
 
 import java.util.*;
@@ -100,23 +101,33 @@ public class VotersRegistrationPoint implements VotersRegistrationService {
 
     }
 
-//    @Override
-//    public Person getPersonByName(String name) {
-//
-//        Person returnValue  = new Person();
-//
-//        registeredPersons.forEach(person -> {
-//            if(person.getName().equalsIgnoreCase(name)){
-//               Optional<Person>  foundPersonOptional  = Optional.of(person);
-//
-////               returnValue = foundPersonOptional.get();
-//
-//
-//            }
-//        });
-//
-//
-//    }
+    @Override
+    public Person getPersonByName(String name) {
+
+        // we return Empty Person if the  Person is not found by name
+        Optional<Person> optionalPerson =Optional.empty();
+
+        for( Person person : registeredPersons){
+
+            if(person.getName().equalsIgnoreCase(name)){
+
+                optionalPerson = Optional.of(person); // the value found is wrapped in optional
+            }
+
+        }
+
+
+        // if the person is found, we get the person else we throw an exception
+
+        final Person foundPerson = optionalPerson.orElseThrow(
+                () -> new PersonNotFoundException("Person Not found")
+        );
+
+
+        return foundPerson;
+
+
+    }
 
     @Override
     public Set<Person> getRegisteredPersons() {

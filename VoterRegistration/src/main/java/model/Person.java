@@ -18,6 +18,8 @@ public class Person {
 
 
 
+
+
     private void setPriority(){
         if(personType == PersonType.ELDERLY_PERSON){
             this.priority = PersonType.ELDERLY_PERSON.getPriority();
